@@ -7,13 +7,13 @@ echo "\___ \    | |     / _ \   | |_) |   | |  "
 echo " ___) |   | |    / ___ \  |  _ <    | |  "
 echo "|____/    |_|   /_/   \_\ |_| \_\   |_|  "
 echo
-echo "Build your Multi network (BYMN) end-to-end test"
+echo "Build your first network (BYFN) end-to-end test"
 echo
-CHANNEL_NAME="$1"
-DELAY="$2"
-LANGUAGE="$3"
-TIMEOUT="$4"
-VERBOSE="$5"
+CHANNEL_NAME="mychannel"
+DELAY="3"
+LANGUAGE="golang"
+TIMEOUT="10"
+VERBOSE="false"
 : ${CHANNEL_NAME:="mychannel"}
 : ${DELAY:="3"}
 : ${LANGUAGE:="golang"}
@@ -105,7 +105,7 @@ echo "Querying chaincode on peer1.org2..."
 chaincodeQuery 1 2 90
 
 echo
-echo "========= All GOOD, BYMN execution completed =========== "
+echo "========= All GOOD, BYFN execution completed =========== "
 echo
 
 echo
