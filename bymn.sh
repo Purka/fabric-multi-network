@@ -133,12 +133,6 @@ function checkPrereqs() {
 # Generate the needed certificates, the genesis block and start the network.
 function networkUp() {
   checkPrereqs
-  # generate artifacts if they don't exist
-  if [ ! -d "crypto-config" ]; then
-    generateCerts
-    replacePrivateKey
-    generateChannelArtifacts
-  fi
   IMAGE_TAG=$IMAGETAG docker stack deploy --compose-file $COMPOSE_FILE $DOCKER_STACK 2>&1
   if [ $? -ne 0 ]; then
     echo "ERROR !!!! Unable to start network"
