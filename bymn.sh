@@ -31,9 +31,9 @@
 export PATH=${PWD}/../bin:${PWD}:$PATH
 export FABRIC_CFG_PATH=${PWD}
 export VERBOSE=false
-export ORDERER_HOSTNAME="orderer-node"
-export ORG1_HOSTNAME="org1"
-export ORG2_HOSTNAME="org2"
+export ORDERER_HOSTNAME="46.101.192.236"
+export ORG1_HOSTNAME="46.101.192.236"
+export ORG2_HOSTNAME="178.128.204.29"
 export SWARM_NETWORK="fabric"
 export DOCKER_STACK="fabric"
 
@@ -68,24 +68,6 @@ function printHelp() {
   echo "	bymn.sh generate"
   echo "	bymn.sh up"
   echo "	bymn.sh down"
-}
-
-# Ask user for confirmation to proceed
-function askProceed() {
-  read -p "Continue? [Y/n] " ans
-  case "$ans" in
-  y | Y | "")
-    echo "proceeding ..."
-    ;;
-  n | N)
-    echo "exiting..."
-    exit 1
-    ;;
-  *)
-    echo "invalid response"
-    askProceed
-    ;;
-  esac
 }
 
 # Obtain CONTAINER_IDS and remove them
@@ -467,8 +449,6 @@ if [ "${IF_COUCHDB}" == "couchdb" ]; then
 else
   echo "${EXPMODE} for channel '${CHANNEL_NAME}' with CLI timeout of '${CLI_TIMEOUT}' seconds and CLI delay of '${CLI_DELAY}' seconds"
 fi
-# ask for confirmation to proceed
-askProceed
 
 #Create the network using docker compose
 if [ "${MODE}" == "up" ]; then
