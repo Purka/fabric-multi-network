@@ -147,7 +147,7 @@ cat << EOF > DevServer_connection.json
     },
     "orderers": {
         "orderer.example.com": {
-            "url": "grpc://46.101.192.236:7050",
+            "url": "grpcs://46.101.192.236:7050",
             "grpcOptions": {
                 "ssl-target-name-override": "orderer.example.com"
             },
@@ -158,8 +158,8 @@ cat << EOF > DevServer_connection.json
     },
     "peers": {
         "peer0.org1.example.com": {
-            "url": "grpc://46.101.192.236:7051",
-            "eventUrl": "grpc://46.101.192.236:7053",
+            "url": "grpcs://46.101.192.236:7051",
+            "eventUrl": "grpcs://46.101.192.236:7053",
             "grpcOptions": {
                 "ssl-target-name-override": "peer0.org1.example.com"
             },
@@ -168,8 +168,8 @@ cat << EOF > DevServer_connection.json
             }
         },
         "peer1.org1.example.com": {
-            "url": "grpc://46.101.192.236:8051",
-            "eventUrl": "grpc://46.101.192.236:8053",
+            "url": "grpcs://46.101.192.236:8051",
+            "eventUrl": "grpcs://46.101.192.236:8053",
             "grpcOptions": {
                 "ssl-target-name-override": "peer1.org1.example.com"
             },
@@ -178,8 +178,8 @@ cat << EOF > DevServer_connection.json
             }
         },
         "peer0.org2.example.com": {
-            "url": "grpc://178.128.204.29:7051",
-            "eventUrl": "grpc://178.128.204.29:7053",
+            "url": "grpcs://178.128.204.29:7051",
+            "eventUrl": "grpcs://178.128.204.29:7053",
             "grpcOptions": {
                 "ssl-target-name-override": "peer0.org2.example.com"
             },
@@ -188,8 +188,8 @@ cat << EOF > DevServer_connection.json
             }
         },
         "peer1.org2.example.com": {
-            "url": "grpc://178.128.204.29:8051",
-            "eventUrl": "grpc://178.128.204.29:8053",
+            "url": "grpcs://178.128.204.29:8051",
+            "eventUrl": "grpcs://178.128.204.29:8053",
             "grpcOptions": {
                 "ssl-target-name-override": "peer1.org2.example.com"
             },
