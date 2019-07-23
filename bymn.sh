@@ -133,7 +133,7 @@ function checkPrereqs() {
 # Generate the needed certificates, the genesis block and start the network.
 function networkUp() {
   checkPrereqs
-  IMAGE_TAG=$IMAGETAG docker stack deploy --compose-file $COMPOSE_FILE $DOCKER_STACK 2>&1
+  IMAGE_TAG=$IMAGETAG docker-compose -f $COMPOSE_FILE up -d 2>&1
   if [ $? -ne 0 ]; then
     echo "ERROR !!!! Unable to start network"
     exit 1
