@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-version: '3.4'
+version: '2.0'
 
 volumes:
   orderer.example.com:
@@ -38,6 +38,10 @@ services:
     - ./crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/msp:/var/hyperledger/orderer/msp
     - ./crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/tls/:/var/hyperledger/orderer/tls
     - orderer.example.com:/var/hyperledger/production/orderer
+    extra_hosts:
+      - "peer0.org2.example.com:178.128.204.29"
+      - "peer1.org2.example.com:178.128.204.29"
+      - "ca.org2.example.com:178.128.204.29"
     deploy:
             mode: replicated
             replicas: 1
@@ -55,6 +59,7 @@ services:
       bymn:
         aliases:
           - orderer.example.com
+
   ca1:
     image: hyperledger/fabric-ca:$IMAGE_TAG
     environment:
@@ -68,6 +73,10 @@ services:
     command: sh -c 'fabric-ca-server start --ca.certfile /etc/hyperledger/fabric-ca-server-config/ca.org1.example.com-cert.pem --ca.keyfile /etc/hyperledger/fabric-ca-server-config/CA1_PRIVATE_KEY  -b admin:adminpw -d'
     volumes:
       - ./crypto-config/peerOrganizations/org1.example.com/ca/:/etc/hyperledger/fabric-ca-server-config
+    extra_hosts:
+      - "peer0.org2.example.com:178.128.204.29"
+      - "peer1.org2.example.com:178.128.204.29"
+      - "ca.org2.example.com:178.128.204.29"
     container_name: ca1
     deploy:
             mode: replicated
@@ -111,7 +120,15 @@ services:
       - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.org1.example.com:7051
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.org1.example.com:7051
       - CORE_PEER_LOCALMSPID=Org1MSP
-
+      - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb0:5984
+      # The CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME and CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD
+      # provide the credentials for ledger to connect to CouchDB.  The username and password must
+      # match the username and password set for the associated CouchDB.
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=
+    depends_on:
+      - couchdb0
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
     command: peer node start
 
@@ -121,7 +138,10 @@ services:
         - ./crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls:/etc/hyperledger/fabric/tls
         #- ./crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/ca:/etc/hyperledger/fabric/ca
         - peer0.org1.example.com:/var/hyperledger/production
-    
+    extra_hosts:
+      - "peer0.org2.example.com:178.128.204.29"
+      - "peer1.org2.example.com:178.128.204.29"
+      - "ca.org2.example.com:178.128.204.29"
     deploy:
             mode: replicated
             replicas: 1
@@ -142,8 +162,7 @@ services:
       bymn:
         aliases:
           - peer0.org1.example.com
-           
-
+     
   org1peer1:
     container_name: org1peer1
     image: hyperledger/fabric-peer:$IMAGE_TAG
@@ -168,7 +187,15 @@ services:
       - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.org1.example.com:7051
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.org1.example.com:8051
       - CORE_PEER_LOCALMSPID=Org1MSP
-
+      - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb1:5984
+      # The CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME and CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD
+      # provide the credentials for ledger to connect to CouchDB.  The username and password must
+      # match the username and password set for the associated CouchDB.
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=
+    depends_on:
+      - couchdb1
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
     command: peer node start
 
@@ -178,7 +205,10 @@ services:
         - ./crypto-config/peerOrganizations/org1.example.com/peers/peer1.org1.example.com/tls:/etc/hyperledger/fabric/tls
         #- ./crypto-config/peerOrganizations/org1.example.com/peers/peer1.org1.example.com/ca:/etc/hyperledger/fabric/ca
         - peer1.org1.example.com:/var/hyperledger/production
-    
+    extra_hosts:
+      - "peer0.org2.example.com:178.128.204.29"
+      - "peer1.org2.example.com:178.128.204.29"
+      - "ca.org2.example.com:178.128.204.29"
     deploy:
             mode: replicated
             replicas: 1
@@ -238,5 +268,36 @@ services:
         - ./channel-artifacts:/opt/gopath/src/github.com/hyperledger/fabric/peer/channel-artifacts
     networks:
       - bymn
+
+  couchdb0:
+    container_name: couchdb0
+    image: hyperledger/fabric-couchdb
+    # Populate the COUCHDB_USER and COUCHDB_PASSWORD to set an admin user and password
+    # for CouchDB.  This will prevent CouchDB from operating in an "Admin Party" mode.
+    environment:
+      - COUCHDB_USER=
+      - COUCHDB_PASSWORD=
+    # Comment/Uncomment the port mapping if you want to hide/expose the CouchDB service,
+    # for example map it to utilize Fauxton User Interface in dev environments.
+    ports:
+      - "5984:5984"
+    networks:
+      - bymn
+
+  couchdb1:
+    container_name: couchdb1
+    image: hyperledger/fabric-couchdb
+    # Populate the COUCHDB_USER and COUCHDB_PASSWORD to set an admin user and password
+    # for CouchDB.  This will prevent CouchDB from operating in an "Admin Party" mode.
+    environment:
+      - COUCHDB_USER=
+      - COUCHDB_PASSWORD=
+    # Comment/Uncomment the port mapping if you want to hide/expose the CouchDB service,
+    # for example map it to utilize Fauxton User Interface in dev environments.
+    ports:
+      - "6984:5984"
+    networks:
+      - bymn
+
+      
     
-                 
