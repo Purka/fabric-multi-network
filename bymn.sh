@@ -138,12 +138,10 @@ function networkUp() {
     echo "ERROR !!!! Unable to start network"
     exit 1
   fi
-  
 }
 
 function execCli() {
   checkPrereqs
-  
   docker exec org1cli scripts/script.sh $CHANNEL_NAME $CLI_DELAY $LANGUAGE $CLI_TIMEOUT $VERBOSE
   if [ $? -ne 0 ]; then
     echo "ERROR !!!! Test failed"
@@ -151,13 +149,10 @@ function execCli() {
   fi
 }
 
-
-
-
 # Tear down running network
 function networkDown() {
   # stop org3 containers also in addition to org1 and org2, in case we were running sample to add org3
-  docker stack rm $DOCKER_STACK
+  docker-compose -f $COMPOSE_FILE down --volumes --remove-orphans
 
   # Don't remove the generated artifacts -- note, the ledgers are always removed
   if [ "$MODE" != "restart" ]; then
