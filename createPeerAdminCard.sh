@@ -4,7 +4,7 @@
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 # 
-# http://www.apache.org/licenses/LICENSE-2.0
+# https://www.apache.org/licenses/LICENSE-2.0
 # 
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -200,14 +200,14 @@ cat << EOF > DevServer_connection.json
     },
     "certificateAuthorities": {
         "ca.org1.example.com": {
-            "url": "http://46.101.192.236:7054",
+            "url": "https://46.101.192.236:7054",
             "caName": "ca.org1.example.com",
             "httpOptions": {
                 "verify": false
             }
         },
         "ca.org2.example.com": {
-            "url": "http://178.128.204.29:7054",
+            "url": "https://178.128.204.29:7054",
             "caName": "ca.org2.example.com",
             "httpOptions": {
                 "verify": false
