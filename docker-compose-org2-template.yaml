@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-version: '2.0'
+version: '3.4'
 
 volumes:
   peer0.org2.example.com:
@@ -13,8 +13,6 @@ networks:
   bymn:
     external:
       name: $SWARM_NETWORK
-    
-
 
 services:
   ca2:
