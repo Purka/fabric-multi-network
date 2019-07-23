@@ -133,7 +133,14 @@ function checkPrereqs() {
 # Generate the needed certificates, the genesis block and start the network.
 function networkUp() {
   checkPrereqs
-  IMAGE_TAG=$IMAGETAG docker-compose -f $COMPOSE_FILE up -d 2>&1
+   # generate artifacts if they don't exist
+  if [ ! -d "crypto-config" ]; then
+    generateCerts
+    replacePrivateKey
+    generateChannelArtifacts
+  fi
+
+  IMAGE_TAG="1.2.0" docker-compose -f $COMPOSE_FILE up -d 2>&1
   if [ $? -ne 0 ]; then
     echo "ERROR !!!! Unable to start network"
     exit 1
@@ -360,7 +367,7 @@ CLI_DELAY=3
 # channel name defaults to "mychannel"
 CHANNEL_NAME="mychannel"
 # use this as the default docker-compose yaml definition
-COMPOSE_FILE=docker-compose-cli.yaml
+#COMPOSE_FILE=docker-compose-cli.yaml
 #
 COMPOSE_FILE_COUCH=docker-compose-couch.yaml
 # org3 docker compose file
