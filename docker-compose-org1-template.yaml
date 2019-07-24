@@ -84,7 +84,7 @@ services:
         condition: on-failure
       placement:
           constraints:
-            - node.hostname == $ORG1_HOSTNAME
+            - node.hostname == "46.101.192.236"
     ports:
      - published: 7054
        target: 7054
@@ -151,7 +151,7 @@ services:
         condition: on-failure
       placement:
           constraints:
-            - node.hostname == $ORG1_HOSTNAME
+            - node.hostname == "46.101.192.236"
     ports:
       - published: 7051
         target: 7051
@@ -222,8 +222,7 @@ services:
         condition: on-failure
       placement:
           constraints:
-              - node.hostname == $ORG1_HOSTNAME
-
+            - node.hostname == "46.101.192.236"
     ports:
       - published: 8051
         target: 7051
@@ -248,7 +247,7 @@ services:
         condition: on-failure
       placement:
           constraints:
-            - node.hostname == $ORG1_HOSTNAME
+            - node.hostname == "46.101.192.236"
     environment:
       - GOPATH=/opt/gopath
       - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
