@@ -13,12 +13,12 @@ volumes:
 networks:
   bymn:
     external:
-      name: $SWARM_NETWORK
+      name: fabric
     
 services:
   orderer:
     container_name: orderer
-    image: hyperledger/fabric-orderer:$IMAGE_TAG
+    image: hyperledger/fabric-orderer:1.2.0
     environment:
       - ORDERER_GENERAL_LOGLEVEL=DEBUG
       - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
@@ -49,7 +49,7 @@ services:
         condition: on-failure
       placement:
           constraints:
-            - node.hostname == $ORDERER_HOSTNAME
+            - node.hostname == 46.101.192.236
     ports:
       - published: 7050
         target: 7050
@@ -60,7 +60,7 @@ services:
           - orderer.example.com
 
   ca1:
-    image: hyperledger/fabric-ca:$IMAGE_TAG
+    image: hyperledger/fabric-ca:1.2.0
     environment:
       - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
       - FABRIC_CA_SERVER_CA_NAME=ca.org1.example.com
@@ -84,7 +84,7 @@ services:
         condition: on-failure
       placement:
           constraints:
-            - node.hostname == "46.101.192.236"
+            - node.hostname == 46.101.192.236
     ports:
      - published: 7054
        target: 7054
@@ -95,7 +95,7 @@ services:
           - ca.org1.example.com
   org1peer0:
     container_name: org1peer0
-    image: hyperledger/fabric-peer:$IMAGE_TAG
+    image: hyperledger/fabric-peer:1.2.0
     environment:
       - CORE_PEER_NETWORKID=peer0.org1.example.com
       - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
@@ -151,7 +151,7 @@ services:
         condition: on-failure
       placement:
           constraints:
-            - node.hostname == "46.101.192.236"
+            - node.hostname == 46.101.192.236
     ports:
       - published: 7051
         target: 7051
@@ -166,7 +166,7 @@ services:
      
   org1peer1:
     container_name: org1peer1
-    image: hyperledger/fabric-peer:$IMAGE_TAG
+    image: hyperledger/fabric-peer:1.2.0
     environment:
       - CORE_PEER_NETWORKID=peer1.org1.example.com
       - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
@@ -222,7 +222,7 @@ services:
         condition: on-failure
       placement:
           constraints:
-            - node.hostname == "46.101.192.236"
+            - node.hostname == 46.101.192.236
     ports:
       - published: 8051
         target: 7051
@@ -237,7 +237,7 @@ services:
 
   org1cli:
     container_name: org1cli
-    image: hyperledger/fabric-tools:$IMAGE_TAG
+    image: hyperledger/fabric-tools:1.2.0
     tty: true
     stdin_open: true
     deploy:
@@ -247,7 +247,7 @@ services:
         condition: on-failure
       placement:
           constraints:
-            - node.hostname == "46.101.192.236"
+            - node.hostname == 46.101.192.236
     environment:
       - GOPATH=/opt/gopath
       - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock

@@ -12,11 +12,11 @@ volumes:
 networks:
   bymn:
     external:
-      name: $SWARM_NETWORK
+      name: fabric
 
 services:
   ca2:
-    image: hyperledger/fabric-ca:$IMAGE_TAG
+    image: hyperledger/fabric-ca:1.2.0
     environment:
       - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
       - FABRIC_CA_SERVER_CA_NAME=ca.org2.example.com
@@ -41,7 +41,7 @@ services:
         condition: on-failure
       placement:
           constraints:
-            - node.hostname == "178.128.204.29"
+            - node.hostname == 178.128.204.29
     ports:
      - published: 7054
        target: 7054
@@ -53,7 +53,7 @@ services:
 
   org2peer0:
     container_name: org2peer0
-    image: hyperledger/fabric-peer:$IMAGE_TAG
+    image: hyperledger/fabric-peer:1.2.0
     environment:
       - CORE_PEER_NETWORKID=peer0.org2.example.com
       - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
@@ -109,7 +109,7 @@ services:
         condition: on-failure
       placement:
           constraints:
-            - node.hostname == "178.128.204.29"
+            - node.hostname == 178.128.204.29
     ports:
       - published: 7051
         target: 7051
@@ -124,7 +124,7 @@ services:
 
   org2peer1:
     container_name: org2peer1
-    image: hyperledger/fabric-peer:$IMAGE_TAG
+    image: hyperledger/fabric-peer:1.2.0
     environment:
       - CORE_PEER_NETWORKID=peer1.org2.example.com
       - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
@@ -180,7 +180,7 @@ services:
         condition: on-failure
       placement:
           constraints:
-            - node.hostname == "178.128.204.29"
+            - node.hostname == 178.128.204.29
     ports:
       - published: 8051
         target: 7051
@@ -205,7 +205,7 @@ services:
         condition: on-failure
       placement:
           constraints:
-            - node.hostname == "178.128.204.29"
+            - node.hostname == 178.128.204.29
 ß    environment:
       - GOPATH=/opt/gopath
       - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
