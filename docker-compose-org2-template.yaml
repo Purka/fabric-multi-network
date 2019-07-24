@@ -35,13 +35,13 @@ services:
       - "orderer.example.com:46.101.192.23"
     container_name: ca2
     deploy:
-            mode: replicated
-            replicas: 1
-            restart_policy:
-              condition: on-failure
-            placement:
-                constraints:
-                    - node.hostname == $ORG2_HOSTNAME
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      placement:
+          constraints:
+            - node.hostname == $ORG2_HOSTNAME
     ports:
      - published: 7054
        target: 7054
@@ -87,13 +87,10 @@ services:
       # match the username and password set for the associated CouchDB.
       - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=
       - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=
-
     depends_on:
       - couchdb2
-
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
     command: peer node start
-
     volumes:
         - /var/run/:/host/var/run/
         - ./crypto-config/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/msp:/etc/hyperledger/fabric/msp
@@ -106,21 +103,20 @@ services:
       - "ca.org1.example.com:46.101.192.236"
       - "orderer.example.com:46.101.192.23"
     deploy:
-            mode: replicated
-            replicas: 1
-            restart_policy:
-              condition: on-failure
-            placement:
-                constraints:
-                    - node.hostname == $ORG2_HOSTNAME
-
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      placement:
+          constraints:
+            - node.hostname == $ORG2_HOSTNAME
     ports:
-            - published: 7051
-              target: 7051
-              mode: host
-            - published: 7053
-              target: 7053
-              mode: host
+      - published: 7051
+        target: 7051
+        mode: host
+      - published: 7053
+        target: 7053
+        mode: host
     networks:
       bymn:
         aliases:
@@ -164,10 +160,8 @@ services:
       - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=
     depends_on:
       - couchdb3
-
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
     command: peer node start
-
     volumes:
         - /var/run/:/host/var/run/
         - ./crypto-config/peerOrganizations/org2.example.com/peers/peer1.org2.example.com/msp:/etc/hyperledger/fabric/msp
@@ -180,21 +174,20 @@ services:
       - "ca.org1.example.com:46.101.192.236"
       - "orderer.example.com:46.101.192.23"
     deploy:
-            mode: replicated
-            replicas: 1
-            restart_policy:
-              condition: on-failure
-            placement:
-                constraints:
-                    - node.hostname == $ORG2_HOSTNAME
-
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      placement:
+          constraints:
+              - node.hostname == $ORG2_HOSTNAME
     ports:
-            - published: 8051
-              target: 7051
-              mode: host
-            - published: 8053
-              target: 7053
-              mode: host
+      - published: 8051
+        target: 7051
+        mode: host
+      - published: 8053
+        target: 7053
+        mode: host
     networks:
       bymn:
         aliases:
@@ -206,14 +199,13 @@ services:
     tty: true
     stdin_open: true
     deploy:
-            mode: replicated
-            replicas: 1
-            restart_policy:
-              condition: on-failure
-            placement:
-                constraints:
-                    - node.hostname == $ORG2_HOSTNAME
-
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      placement:
+          constraints:
+              - node.hostname == $ORG2_HOSTNAME
     environment:
       - GOPATH=/opt/gopath
       - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
