@@ -34,8 +34,8 @@ export VERBOSE=false
 export ORDERER_HOSTNAME="0.0.0.xxx"
 export ORG1_HOSTNAME="0.0.0.xxx"
 export ORG2_HOSTNAME="0.0.0.xxx"
-export SWARM_NETWORK="fabric"
-export DOCKER_STACK="fabric"
+export SWARM_NETWORK="bymn"
+export DOCKER_STACK="bymn"
 
 # Print the usage message
 function printHelp() {
