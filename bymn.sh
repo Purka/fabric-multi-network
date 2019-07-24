@@ -140,7 +140,7 @@ function networkUp() {
     generateChannelArtifacts
   fi
 
-  IMAGE_TAG="1.2.0" docker-compose -f $COMPOSE_FILE up -d 2>&1
+  IMAGE_TAG="1.2.0" docker stack deploy --compose-file $COMPOSE_FILE $DOCKER_STACK 2>&1
   if [ $? -ne 0 ]; then
     echo "ERROR !!!! Unable to start network"
     exit 1
@@ -159,7 +159,7 @@ function execCli() {
 # Tear down running network
 function networkDown() {
   # stop org3 containers also in addition to org1 and org2, in case we were running sample to add org3
-  docker-compose -f $COMPOSE_FILE down --volumes --remove-orphans
+  docker stack rm $DOCKER_STACK
 
   # Don't remove the generated artifacts -- note, the ledgers are always removed
   if [ "$MODE" != "restart" ]; then
