@@ -109,7 +109,7 @@ services:
         condition: on-failure
       placement:
           constraints:
-            - node.hostname == 206.81.27.141
+            - node.hostname == smartconsent-srv3
     ports:
       - published: 7051
         target: 7051
@@ -180,7 +180,7 @@ services:
         condition: on-failure
       placement:
           constraints:
-            - node.hostname == 206.81.27.141
+            - node.hostname == smartconsent-srv3
     ports:
       - published: 8051
         target: 7051
@@ -205,7 +205,7 @@ services:
         condition: on-failure
       placement:
           constraints:
-            - node.hostname == 206.81.27.141
+            - node.hostname == smartconsent-srv3
     environment:
       - GOPATH=/opt/gopath
       - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
