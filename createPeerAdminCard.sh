@@ -77,7 +77,7 @@ fi
 
 cat << EOF > DevServer_connection.json
 {
-    "name": "hlfv1",
+    "name": "fabric",
     "x-type": "hlfv1",
     "x-commitTimeout": 300,
     "version": "1.0.0",
