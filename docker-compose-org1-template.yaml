@@ -18,7 +18,7 @@ networks:
 services:
   orderer:
     container_name: orderer
-    image: hyperledger/fabric-orderer:1.2.0
+    image: hyperledger/fabric-orderer:1.4.0
     environment:
       - ORDERER_GENERAL_LOGLEVEL=DEBUG
       - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
@@ -39,9 +39,9 @@ services:
     - ./crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/tls/:/var/hyperledger/orderer/tls
     - orderer.example.com:/var/hyperledger/production/orderer
     extra_hosts:
-      - "peer0.org2.example.com:178.128.204.29"
-      - "peer1.org2.example.com:178.128.204.29"
-      - "ca.org2.example.com:178.128.204.29"
+      - "peer0.org2.example.com:206.81.27.141"
+      - "peer1.org2.example.com:206.81.27.141"
+      - "ca.org2.example.com:206.81.27.141"
     deploy:
       mode: replicated
       replicas: 1
@@ -49,7 +49,7 @@ services:
         condition: on-failure
       placement:
           constraints:
-            - node.hostname == 46.101.192.236
+            - node.hostname == 178.128.204.29
     ports:
       - published: 7050
         target: 7050
@@ -73,9 +73,9 @@ services:
     volumes:
       - ./crypto-config/peerOrganizations/org1.example.com/ca/:/etc/hyperledger/fabric-ca-server-config
     extra_hosts:
-      - "peer0.org2.example.com:178.128.204.29"
-      - "peer1.org2.example.com:178.128.204.29"
-      - "ca.org2.example.com:178.128.204.29"
+      - "peer0.org2.example.com:206.81.27.141"
+      - "peer1.org2.example.com:206.81.27.141"
+      - "ca.org2.example.com:206.81.27.141"
     container_name: ca1
     deploy:
       mode: replicated
@@ -84,7 +84,7 @@ services:
         condition: on-failure
       placement:
           constraints:
-            - node.hostname == 46.101.192.236
+            - node.hostname == 178.128.204.29
     ports:
      - published: 7054
        target: 7054
@@ -141,9 +141,9 @@ services:
         #- ./crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/ca:/etc/hyperledger/fabric/ca
         - peer0.org1.example.com:/var/hyperledger/production
     extra_hosts:
-      - "peer0.org2.example.com:178.128.204.29"
-      - "peer1.org2.example.com:178.128.204.29"
-      - "ca.org2.example.com:178.128.204.29"
+      - "peer0.org2.example.com:206.81.27.141"
+      - "peer1.org2.example.com:206.81.27.141"
+      - "ca.org2.example.com:206.81.27.141"
     deploy:
       mode: replicated
       replicas: 1
@@ -151,7 +151,7 @@ services:
         condition: on-failure
       placement:
           constraints:
-            - node.hostname == 46.101.192.236
+            - node.hostname == 178.128.204.29
     ports:
       - published: 7051
         target: 7051
@@ -212,9 +212,9 @@ services:
         #- ./crypto-config/peerOrganizations/org1.example.com/peers/peer1.org1.example.com/ca:/etc/hyperledger/fabric/ca
         - peer1.org1.example.com:/var/hyperledger/production
     extra_hosts:
-      - "peer0.org2.example.com:178.128.204.29"
-      - "peer1.org2.example.com:178.128.204.29"
-      - "ca.org2.example.com:178.128.204.29"
+      - "peer0.org2.example.com:206.81.27.141"
+      - "peer1.org2.example.com:206.81.27.141"
+      - "ca.org2.example.com:206.81.27.141"
     deploy:
       mode: replicated
       replicas: 1
@@ -222,7 +222,7 @@ services:
         condition: on-failure
       placement:
           constraints:
-            - node.hostname == 46.101.192.236
+            - node.hostname == 178.128.204.29
     ports:
       - published: 8051
         target: 7051
@@ -247,7 +247,7 @@ services:
         condition: on-failure
       placement:
           constraints:
-            - node.hostname == 46.101.192.236
+            - node.hostname == 178.128.204.29
     environment:
       - GOPATH=/opt/gopath
       - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
