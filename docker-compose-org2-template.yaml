@@ -32,7 +32,7 @@ services:
       - "peer0.org1.example.com:178.128.204.29"
       - "peer1.org1.example.com:178.128.204.29"
       - "ca.org1.example.com:178.128.204.29"
-      - "orderer.example.com:46.101.192.23"
+      - "orderer.example.com:178.128.204.29"
     container_name: ca2
     deploy:
       mode: replicated
@@ -101,7 +101,7 @@ services:
       - "peer0.org1.example.com:178.128.204.29"
       - "peer1.org1.example.com:178.128.204.29"
       - "ca.org1.example.com:178.128.204.29"
-      - "orderer.example.com:46.101.192.23"
+      - "orderer.example.com:178.128.204.29"
     deploy:
       mode: replicated
       replicas: 1
@@ -172,7 +172,7 @@ services:
       - "peer0.org1.example.com:178.128.204.29"
       - "peer1.org1.example.com:178.128.204.29"
       - "ca.org1.example.com:178.128.204.29"
-      - "orderer.example.com:46.101.192.23"
+      - "orderer.example.com:178.128.204.29"
     deploy:
       mode: replicated
       replicas: 1
