@@ -30,7 +30,7 @@ services:
       - ORDERER_GENERAL_TLS_ENABLED=true
       - ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key
       - ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt
-      - ORDERER_GENERAL_TLS_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
+      - ORDERER_GENERAL_TLS_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric
     command: orderer
     volumes:
@@ -93,6 +93,7 @@ services:
       bymn:
         aliases:
           - ca.org1.example.com
+
   org1peer0:
     container_name: org1peer0
     image: hyperledger/fabric-peer:1.4.0
@@ -133,12 +134,11 @@ services:
       - couchdb0
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
     command: peer node start
-
     volumes:
         - /var/run/:/host/var/run/
         - ./crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/msp:/etc/hyperledger/fabric/msp
         - ./crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls:/etc/hyperledger/fabric/tls
-        #- ./crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/ca:/etc/hyperledger/fabric/ca
+        - ./crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/ca:/etc/hyperledger/fabric/ca
         - peer0.org1.example.com:/var/hyperledger/production
     extra_hosts:
       - "peer0.org2.example.com:206.81.27.141"
@@ -204,12 +204,11 @@ services:
       - couchdb1
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
     command: peer node start
-
     volumes:
         - /var/run/:/host/var/run/
         - ./crypto-config/peerOrganizations/org1.example.com/peers/peer1.org1.example.com/msp:/etc/hyperledger/fabric/msp
         - ./crypto-config/peerOrganizations/org1.example.com/peers/peer1.org1.example.com/tls:/etc/hyperledger/fabric/tls
-        #- ./crypto-config/peerOrganizations/org1.example.com/peers/peer1.org1.example.com/ca:/etc/hyperledger/fabric/ca
+        - ./crypto-config/peerOrganizations/org1.example.com/peers/peer1.org1.example.com/ca:/etc/hyperledger/fabric/ca
         - peer1.org1.example.com:/var/hyperledger/production
     extra_hosts:
       - "peer0.org2.example.com:206.81.27.141"

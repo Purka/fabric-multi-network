@@ -29,9 +29,9 @@ services:
     volumes:
       - ./crypto-config/peerOrganizations/org2.example.com/ca/:/etc/hyperledger/fabric-ca-server-config
     extra_hosts:
-      - "peer0.org1.example.com:46.101.192.236"
-      - "peer1.org1.example.com:46.101.192.236"
-      - "ca.org1.example.com:46.101.192.236"
+      - "peer0.org1.example.com:178.128.204.29"
+      - "peer1.org1.example.com:178.128.204.29"
+      - "ca.org1.example.com:178.128.204.29"
       - "orderer.example.com:46.101.192.23"
     container_name: ca2
     deploy:
@@ -95,12 +95,12 @@ services:
         - /var/run/:/host/var/run/
         - ./crypto-config/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/msp:/etc/hyperledger/fabric/msp
         - ./crypto-config/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls:/etc/hyperledger/fabric/tls
-        #- ./crypto-config/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/ca:/etc/hyperledger/fabric/ca
+        - ./crypto-config/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/ca:/etc/hyperledger/fabric/ca
         - peer0.org2.example.com:/var/hyperledger/production
     extra_hosts:
-      - "peer0.org1.example.com:46.101.192.236"
-      - "peer1.org1.example.com:46.101.192.236"
-      - "ca.org1.example.com:46.101.192.236"
+      - "peer0.org1.example.com:178.128.204.29"
+      - "peer1.org1.example.com:178.128.204.29"
+      - "ca.org1.example.com:178.128.204.29"
       - "orderer.example.com:46.101.192.23"
     deploy:
       mode: replicated
@@ -166,12 +166,12 @@ services:
         - /var/run/:/host/var/run/
         - ./crypto-config/peerOrganizations/org2.example.com/peers/peer1.org2.example.com/msp:/etc/hyperledger/fabric/msp
         - ./crypto-config/peerOrganizations/org2.example.com/peers/peer1.org2.example.com/tls:/etc/hyperledger/fabric/tls
-        #- ./crypto-config/peerOrganizations/org2.example.com/peers/peer1.org2.example.com/ca:/etc/hyperledger/fabric/ca
+        - ./crypto-config/peerOrganizations/org2.example.com/peers/peer1.org2.example.com/ca:/etc/hyperledger/fabric/ca
         - peer1.org2.example.com:/var/hyperledger/production
     extra_hosts:
-      - "peer0.org1.example.com:46.101.192.236"
-      - "peer1.org1.example.com:46.101.192.236"
-      - "ca.org1.example.com:46.101.192.236"
+      - "peer0.org1.example.com:178.128.204.29"
+      - "peer1.org1.example.com:178.128.204.29"
+      - "ca.org1.example.com:178.128.204.29"
       - "orderer.example.com:46.101.192.23"
     deploy:
       mode: replicated
