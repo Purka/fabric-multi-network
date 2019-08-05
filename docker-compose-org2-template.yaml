@@ -41,7 +41,7 @@ services:
         condition: on-failure
       placement:
           constraints:
-            - node.hostname == 206.81.27.141
+            - node.hostname == smartconsent-srv3
     ports:
      - published: 7054
        target: 7054
