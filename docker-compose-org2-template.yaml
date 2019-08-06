@@ -28,12 +28,13 @@ services:
     command: sh -c 'fabric-ca-server start --ca.certfile /etc/hyperledger/fabric-ca-server-config/ca.org2.example.com-cert.pem --ca.keyfile /etc/hyperledger/fabric-ca-server-config/CA2_PRIVATE_KEY  -b admin:adminpw -d'
     volumes:
       - ./crypto-config/peerOrganizations/org2.example.com/ca/:/etc/hyperledger/fabric-ca-server-config
+      - /var/run/docker.sock:/var/run/docker.sock
     extra_hosts:
       - "peer0.org1.example.com:178.128.204.29"
       - "peer1.org1.example.com:178.128.204.29"
       - "ca.org1.example.com:178.128.204.29"
       - "orderer.example.com:178.128.204.29"
-    container_name: ca2
+    #container_name: ca2
     deploy:
       mode: replicated
       replicas: 1
@@ -52,7 +53,7 @@ services:
           - ca.org2.example.com
 
   org2peer0:
-    container_name: org2peer0
+    #container_name: org2peer0
     image: hyperledger/fabric-peer:1.4.0
     environment:
       - CORE_PEER_NETWORKID=peer0.org2.example.com
@@ -123,7 +124,7 @@ services:
           - peer0.org2.example.com
 
   org2peer1:
-    container_name: org2peer1
+    #container_name: org2peer1
     image: hyperledger/fabric-peer:1.4.0
     environment:
       - CORE_PEER_NETWORKID=peer1.org2.example.com
@@ -194,7 +195,7 @@ services:
           - peer1.org2.example.com
 
   org2cli:
-    container_name: org2cli
+    #container_name: org2cli
     image: hyperledger/fabric-tools:latest
     tty: true
     stdin_open: true
@@ -231,7 +232,7 @@ services:
       - bymn
   
   couchdb2:
-    container_name: couchdb2
+    #container_name: couchdb2
     image: hyperledger/fabric-couchdb
     # Populate the COUCHDB_USER and COUCHDB_PASSWORD to set an admin user and password
     # for CouchDB.  This will prevent CouchDB from operating in an "Admin Party" mode.
@@ -246,7 +247,7 @@ services:
       - bymn
 
   couchdb3:
-    container_name: couchdb3
+    #container_name: couchdb3
     image: hyperledger/fabric-couchdb
     # Populate the COUCHDB_USER and COUCHDB_PASSWORD to set an admin user and password
     # for CouchDB.  This will prevent CouchDB from operating in an "Admin Party" mode.
